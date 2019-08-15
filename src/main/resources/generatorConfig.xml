@@ -12,17 +12,17 @@
 		   <property name="suppressDate" value="true" /> 
         </commentGenerator>
 
-         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                         connectionURL="jdbc:mysql://10.254.0.184:6603/gms_m_1?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowMultiQueries=true&amp;tinyInt1isBit=false"
-                         userId="erp" password="erp">
+<!--         <jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+<!--                         connectionURL="jdbc:mysql://10.254.0.184:6603/gms_m_1?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowMultiQueries=true&amp;tinyInt1isBit=false"-->
+<!--                         userId="erp" password="erp">-->
 
-         </jdbcConnection>
+<!--         </jdbcConnection>-->
 
-<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
-<!--                        connectionURL="jdbc:mysql://10.253.1.27:3306/contract_m_1?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowMultiQueries=true&amp;tinyInt1isBit=false"-->
-<!--                        userId="dev_test" password="dev_test">-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://10.253.1.27:3306/sam_m_1?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowMultiQueries=true&amp;tinyInt1isBit=false"
+                        userId="dev_test" password="dev_test">
 
-<!--        </jdbcConnection>-->
+        </jdbcConnection>
 
         <javaModelGenerator targetPackage="com.retailo2o.smc.entity"
                             targetProject="src/main/java">
@@ -43,7 +43,7 @@
 
 		
         
-        <table tableName="tbsubcode" domainObjectName="SubCode"
+        <table tableName="bb_trans_payment_mode" domainObjectName="BbTransPaymentMode"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

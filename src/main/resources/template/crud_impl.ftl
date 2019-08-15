@@ -1,8 +1,8 @@
 package com.retailo2o.smc.service.impl;
 
-import com.retailo2o.smc.entity.${modelName};
-import com.retailo2o.smc.mapper.${modelName}Mapper;
-import com.retailo2o.smc.service.${modelName}Service;
+import com.retailo2o.smc.entity.${data.modelName};
+import com.retailo2o.smc.mapper.${data.modelName}Mapper;
+import com.retailo2o.smc.service.${data.modelName}Service;
 import net.jplugin.core.ctx.api.BindRuleService;
 import net.jplugin.core.das.api.PageCond;
 import net.jplugin.core.das.api.PageQueryResult;
@@ -15,37 +15,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 @BindRuleService
-public class ${modelName}ServiceImpl implements ${modelName}Service {
+public class ${data.modelName}ServiceImpl implements ${data.modelName}Service {
     @RefLogger
     private Logger logger;
 
     @RefMapper
-    private ${modelName}Mapper mapper;
+    private ${data.modelName}Mapper mapper;
 
     private static final long FAIL_INDEX = -1;
 
     @Override
-    public PageQueryResult<${modelName}> queryPage(${modelName} dto, PageCond pageCond) {
-        List<${modelName}> list = mapper.selectPage(dto, pageCond);
+    public PageQueryResult<${data.modelName}> queryPage(${data.modelName} dto, PageCond pageCond) {
+        List<${data.modelName}> list = mapper.selectPage(dto, pageCond);
         if (CollectionUtils.isEmpty(list)) {
-            logger.info("${modelName}列表查询为空");
+            logger.info("${data.modelName}列表查询为空");
             return new PageQueryResult<>(pageCond, new ArrayList<>());
         }
         return new PageQueryResult<>(pageCond, list);
     }
 
     @Override
-    public long merge(${modelName} dto) {
+    public long merge(${data.modelName} dto) {
         if (null == dto) {
-            logger.info("merge failure,${modelName} is null");
+            logger.info("merge failure,${data.modelName} is null");
             return FAIL_INDEX;
         }
         if (dto.getId() == 0) {
-            logger.info("开始新增${modelName}");
+            logger.info("开始新增${data.modelName}");
             return mapper.insertSelective(dto);
         }
         if (dto.getId() > 0) {
-            logger.info("开始更新${modelName}");
+            logger.info("开始更新${data.modelName}");
             return mapper.updateByPrimaryKey(dto);
         }
         return FAIL_INDEX;
@@ -57,7 +57,7 @@ public class ${modelName}ServiceImpl implements ${modelName}Service {
     }
 
     @Override
-    public ${modelName} selectOne(long id) {
+    public ${data.modelName} selectOne(long id) {
         return mapper.selectByPrimaryKey(id);
     }
 }

@@ -25,43 +25,43 @@ public class MyGenerator {
 
     public void sgGen() throws IOException, TemplateException, DocumentException {
         init();
-        //1.首先执行mybatis generator plugin
+        //1.首先设置generatorConfig.xml，执行mybatis generator plugin
         //2.设置DataModel
         DataModel dataModel = new DataModel();
-        dataModel.setModelName("SubCode");
-        dataModel.set_modelName("subCode");
-        dataModel.setTypeCode("SubCode");
-        dataModel.setDesc("子码属性");
-        dataModel.setDsName("");
-        dataModel.setTblName("tbsubcode");
+        dataModel.setModelName("BbTransPaymentMode");
+        dataModel.set_modelName("bbTransPaymentMode");
+        dataModel.setTypeCode("");
+        dataModel.setDesc("");
+        dataModel.setDsName("sam");
+        dataModel.setTblName("bb_trans_payment_mode");
         dataModel.setTimer("");
         dataModel.setTopic("");
         //3.解析
         dataModel.setPairs(XmlUtil.parseSqlXml(new File("src/main/resources/com/retailo2o/smc/mapper/" + dataModel.getModelName() + "Mapper.xml")));
         Map<String, Object> root = new HashMap<>();
         root.put("data", dataModel);
-        //4.export
-        Template exportTemp = cfg.getTemplate("export.ftl");
-        Writer exportWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/export/", dataModel.getModelName() + "Export.java")));
-        exportTemp.process(root, exportWriter);
-        exportWriter.close();
+//        //4.export
+//        Template exportTemp = cfg.getTemplate("export.ftl");
+//        Writer exportWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/export/", dataModel.getModelName() + "Export.java")));
+//        exportTemp.process(root, exportWriter);
+//        exportWriter.close();
         //5.service
-        Template serviceTemp = cfg.getTemplate("sg_c_service.ftl");
+        Template serviceTemp = cfg.getTemplate("crud_service.ftl");
         Writer serviceWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/service/", dataModel.getModelName() + "Service.java")));
         serviceTemp.process(root, serviceWriter);
         serviceWriter.close();
         // 6.impl
-        Template implTemp = cfg.getTemplate("sg_c_service_impl.ftl");
+        Template implTemp = cfg.getTemplate("crud_impl.ftl");
         Writer implWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/service/impl/", dataModel.getModelName() + "ServiceImpl.java")));
         implTemp.process(root, implWriter);
         implWriter.close();
         //7.mapper code
-        Template mapperCodeTemp = cfg.getTemplate("sg_mapper_code.ftl");
+        Template mapperCodeTemp = cfg.getTemplate("crud_mapper_code.ftl");
         Writer mapperCodeWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/mapper/newer/", dataModel.getModelName() + "Mapper.java")));
         mapperCodeTemp.process(root, mapperCodeWriter);
         mapperCodeWriter.close();
         //8.mapper xml
-        Template mapperXmlTemp = cfg.getTemplate("sg_mapper_xml.ftl");
+        Template mapperXmlTemp = cfg.getTemplate("crud_mapper_xml.ftl");
         Writer mapperXmlWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/resources/com/retailo2o/smc/mapper/newer/", dataModel.getModelName() + "Mapper.xml")));
         mapperXmlTemp.process(root, mapperXmlWriter);
         mapperXmlWriter.close();
