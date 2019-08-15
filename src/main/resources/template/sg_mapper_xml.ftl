@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.retailo2o.dds.mapper.prepaid.PrePaidCardIdentifierMapper">
+<mapper namespace="com.retailo2o.dds.mapper.${data.modelName}Mapper">
 
     <insert id="saveOrUpdate">
         insert into ${data.tblName}
         (
         <#list data.pairs as p >
-            ${p.column}
-            <#if p_has_next>,</#if>
+            ${p.column}<#if p_has_next>,</#if>
         </#list>
         )
         values
         <foreach collection="list" item="instObj" index="index" separator=",">
             (
             <#list data.pairs as p >
-                <#noparse>#{instObj.</#noparse>${p.field},jdbcType=${p.type}
-                <#if p_has_next>,</#if>
+                <#noparse>#{instObj.</#noparse>${p.field}},jdbcType=${p.type}<#if p_has_next>},</#if>
             </#list>
             )
         </foreach>
         ON DUPLICATE KEY UPDATE
         <#list data.pairs as p >
-            ${p.column} = VALUES(${p.column})
-            <#if p_has_next>,</#if>
+            ${p.column} = VALUES(${p.column})<#if p_has_next>,</#if>
         </#list>
     </insert>
 
