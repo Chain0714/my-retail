@@ -27,13 +27,15 @@ public class MyGenerator {
         //1.首先执行mybatis generator plugin
         //2.设置DataModel
         DataModel dataModel = new DataModel();
-        dataModel.setModelName("");
-        dataModel.set_modelName("");
-        dataModel.setTypeCode("");
-        dataModel.setDesc("");
+        dataModel.setModelName("SubCode");
+        dataModel.set_modelName("subCode");
+        dataModel.setTypeCode("SubCode");
+        dataModel.setDesc("子码属性");
         dataModel.setDsName("");
-        dataModel.setTblName("");
+        dataModel.setTblName("tbsubcode");
         dataModel.setTimer("");
+        dataModel.setTopic("");
+        //3.解析
         dataModel.setPairs(XmlUtil.parseSqlXml(new File("src/main/resources/com/retailo2o/smc/mapper/" + dataModel.getModelName() + "Mapper.xml")));
         Map<String, Object> root = new HashMap<>();
         root.put("data", dataModel);
@@ -59,9 +61,8 @@ public class MyGenerator {
         mapperCodeWriter.close();
 
         Template mapperXmlTemp = cfg.getTemplate("sg_mapper_code.ftl");
-        Writer mapperXmlWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/resource/com/retailo2o/smc/mapper/" + dataModel.getModelName() + "Mapper.xml")));
+        Writer mapperXmlWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/resources/com/retailo2o/smc/mapper/new" + dataModel.getModelName() + "Mapper.xml")));
         mapperXmlTemp.process(root, mapperXmlWriter);
         mapperXmlWriter.close();
-
     }
 }

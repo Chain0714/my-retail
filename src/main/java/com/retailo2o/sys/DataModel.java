@@ -19,6 +19,8 @@ public class DataModel {
     private String timer;
     private List<Pair> pairs;
 
+    private String topic;
+
 
     @Data
     public static class Pair {

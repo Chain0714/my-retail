@@ -18,12 +18,12 @@ public class ${data.modelName}Export {
     @RefLogger
     private Logger logger;
 
-    private static final String TOPIC = "sg-dds-porm";
+    private static final String TOPIC = "${data.topic}";
 
     /**
     * 单品活动清单
     */
-    public void saveGoodsProm() {
+    public void saveOrUpdate() {
         try {
             String jsonData = ThreadLocalContextManager.getRequestInfo().getContent().getJsonContent();
             ReqData rd = JSON.parseObject(jsonData, ReqData.class);

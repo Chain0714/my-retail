@@ -6,7 +6,7 @@ import net.jplugin.core.das.mybatis.api.BindMapper;
 
 import java.util.List;
 
-@BindMapper(dataSource = "${data.dsName}")
+@BindMapper <#if data.dsName?default("")?trim?length gt 1>(dataSource = "${data.dsName}")</#if>
 public interface ${data.modelName}Mapper {
 
     long saveOrUpdate(List<${data.modelName}> list);

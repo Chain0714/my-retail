@@ -13,7 +13,7 @@
         </commentGenerator>
 
          <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                         connectionURL="jdbc:mysql://10.254.0.184:6603/scart_100117?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowMultiQueries=true&amp;tinyInt1isBit=false"
+                         connectionURL="jdbc:mysql://10.254.0.184:6603/gms_m_1?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowMultiQueries=true&amp;tinyInt1isBit=false"
                          userId="erp" password="erp">
 
          </jdbcConnection>
@@ -43,7 +43,7 @@
 
 		
         
-        <table tableName="tbprepaidcardidentifier" domainObjectName="PrePaidCardIdentifier"
+        <table tableName="tbsubcode" domainObjectName="SubCode"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
