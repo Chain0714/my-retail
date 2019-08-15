@@ -1,5 +1,6 @@
 package com.retailo2o.sys;
 
+import com.retailo2o.sys.util.FileUtil;
 import com.retailo2o.sys.util.XmlUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -41,27 +42,27 @@ public class MyGenerator {
         root.put("data", dataModel);
         //export
         Template exportTemp = cfg.getTemplate("export.ftl");
-        Writer exportWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/java/com/retailo2o/smc/export/" + dataModel.getModelName() + "Export.java")));
+        Writer exportWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/export/", dataModel.getModelName() + "Export.java")));
         exportTemp.process(root, exportWriter);
         exportWriter.close();
 
         Template serviceTemp = cfg.getTemplate("sg_c_service.ftl");
-        Writer serviceWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/java/com/retailo2o/smc/service/" + dataModel.getModelName() + "Service.java")));
+        Writer serviceWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/service/", dataModel.getModelName() + "Service.java")));
         serviceTemp.process(root, serviceWriter);
         serviceWriter.close();
 
         Template implTemp = cfg.getTemplate("sg_c_service_impl.ftl");
-        Writer implWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/java/com/retailo2o/smc/service/impl/" + dataModel.getModelName() + "ServiceImpl.java")));
+        Writer implWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/service/impl/", dataModel.getModelName() + "ServiceImpl.java")));
         implTemp.process(root, implWriter);
         implWriter.close();
 
         Template mapperCodeTemp = cfg.getTemplate("sg_mapper_code.ftl");
-        Writer mapperCodeWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/java/com/retailo2o/smc/mapper/newer/" + dataModel.getModelName() + "Mapper.java")));
+        Writer mapperCodeWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/mapper/newer/", dataModel.getModelName() + "Mapper.java")));
         mapperCodeTemp.process(root, mapperCodeWriter);
         mapperCodeWriter.close();
 
         Template mapperXmlTemp = cfg.getTemplate("sg_mapper_xml.ftl");
-        Writer mapperXmlWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/resources/com/retailo2o/smc/mapper/newer/" + dataModel.getModelName() + "Mapper.xml")));
+        Writer mapperXmlWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/resources/com/retailo2o/smc/mapper/newer/", dataModel.getModelName() + "Mapper.xml")));
         mapperXmlTemp.process(root, mapperXmlWriter);
         mapperXmlWriter.close();
     }
