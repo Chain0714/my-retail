@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class XmlUtil {
     public static List<DataModel.Pair> parseSqlXml(File xml) throws DocumentException {
@@ -19,13 +20,13 @@ public class XmlUtil {
         Document document = reader.read(xml);
         Element resultMap = document.getRootElement().element("resultMap");
         for (Iterator it = resultMap.elementIterator(); it.hasNext(); ) {
-            DataModel.Pair pair = new DataModel.Pair();
             Element element = null;
             try {
                 element = (Element) it.next();
             } catch (Exception e) {
                 break;
             }
+            DataModel.Pair pair = new DataModel.Pair();
             for (Iterator inner = element.attributeIterator(); it.hasNext(); ) {
                 Attribute attribute = null;
                 try {
@@ -45,6 +46,6 @@ public class XmlUtil {
             }
             result.add(pair);
         }
-        return result;
+        return result.parallelStream().filter(o -> null != o.getColumn() || null != o.getField() || null != o.getType()).collect(Collectors.toList());
     }
 }

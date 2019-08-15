@@ -40,30 +40,33 @@ public class MyGenerator {
         dataModel.setPairs(XmlUtil.parseSqlXml(new File("src/main/resources/com/retailo2o/smc/mapper/" + dataModel.getModelName() + "Mapper.xml")));
         Map<String, Object> root = new HashMap<>();
         root.put("data", dataModel);
-        //export
+        //4.export
         Template exportTemp = cfg.getTemplate("export.ftl");
         Writer exportWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/export/", dataModel.getModelName() + "Export.java")));
         exportTemp.process(root, exportWriter);
         exportWriter.close();
-
+        //5.service
         Template serviceTemp = cfg.getTemplate("sg_c_service.ftl");
         Writer serviceWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/service/", dataModel.getModelName() + "Service.java")));
         serviceTemp.process(root, serviceWriter);
         serviceWriter.close();
-
+        // 6.impl
         Template implTemp = cfg.getTemplate("sg_c_service_impl.ftl");
         Writer implWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/service/impl/", dataModel.getModelName() + "ServiceImpl.java")));
         implTemp.process(root, implWriter);
         implWriter.close();
-
+        //7.mapper code
         Template mapperCodeTemp = cfg.getTemplate("sg_mapper_code.ftl");
         Writer mapperCodeWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/mapper/newer/", dataModel.getModelName() + "Mapper.java")));
         mapperCodeTemp.process(root, mapperCodeWriter);
         mapperCodeWriter.close();
-
+        //8.mapper xml
         Template mapperXmlTemp = cfg.getTemplate("sg_mapper_xml.ftl");
         Writer mapperXmlWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/resources/com/retailo2o/smc/mapper/newer/", dataModel.getModelName() + "Mapper.xml")));
         mapperXmlTemp.process(root, mapperXmlWriter);
         mapperXmlWriter.close();
+        //9.revert
+        //git reset --hard
+        //git clean -df
     }
 }
