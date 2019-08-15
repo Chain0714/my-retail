@@ -1,7 +1,6 @@
 package com.retailo2o.dds.mapper;
 
 
-import com.retailo2o.dds.entity.prepaid.PrePaidCardIdentifier;
 import net.jplugin.core.das.mybatis.api.BindMapper;
 
 import java.util.List;
@@ -13,5 +12,5 @@ public interface ${data.modelName}Mapper {
 
     Long ${data._modelName}Count();
 
-    Long deleteALl();
+    Long deleteAll();
 }

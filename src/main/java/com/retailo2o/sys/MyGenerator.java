@@ -56,12 +56,12 @@ public class MyGenerator {
         implWriter.close();
 
         Template mapperCodeTemp = cfg.getTemplate("sg_mapper_code.ftl");
-        Writer mapperCodeWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/java/com/retailo2o/smc/mapper/" + dataModel.getModelName() + "Mapper.java")));
+        Writer mapperCodeWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/java/com/retailo2o/smc/mapper/newer/" + dataModel.getModelName() + "Mapper.java")));
         mapperCodeTemp.process(root, mapperCodeWriter);
         mapperCodeWriter.close();
 
-        Template mapperXmlTemp = cfg.getTemplate("sg_mapper_code.ftl");
-        Writer mapperXmlWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/resources/com/retailo2o/smc/mapper/new" + dataModel.getModelName() + "Mapper.xml")));
+        Template mapperXmlTemp = cfg.getTemplate("sg_mapper_xml.ftl");
+        Writer mapperXmlWriter = new OutputStreamWriter(new FileOutputStream(new File("src/main/resources/com/retailo2o/smc/mapper/newer/" + dataModel.getModelName() + "Mapper.xml")));
         mapperXmlTemp.process(root, mapperXmlWriter);
         mapperXmlWriter.close();
     }

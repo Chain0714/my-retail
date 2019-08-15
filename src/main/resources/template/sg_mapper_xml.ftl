@@ -26,7 +26,7 @@
         </#list>
     </insert>
 
-    <delete id="deleteALl">
+    <delete id="deleteAll">
         delete from ${data.tblName}
     </delete>
 
