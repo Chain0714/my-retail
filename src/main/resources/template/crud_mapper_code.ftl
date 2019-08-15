@@ -11,6 +11,8 @@ import java.util.List;
 public interface ${data.modelName}Mapper {
     List<${data.modelName}> selectPage(@Param("queryDto") ${data.modelName} queryDto, @Param("page") PageCond page);
 
+    List<${data.modelName}> selectList(@Param("queryDto") ${data.modelName} queryDto);
+
     ${data.modelName} selectOne(@Param("id") long id);
 
     long insert(@Param("dto") ${data.modelName} dto);

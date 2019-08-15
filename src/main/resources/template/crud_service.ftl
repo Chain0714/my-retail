@@ -10,11 +10,12 @@ public interface ${data.modelName}Service {
 
     PageQueryResult<${data.modelName}> queryPage(${data.modelName} dto, PageCond pageCond);
 
+    List<${data.modelName}> queryList(${data.modelName} dto);
+
     long merge(${data.modelName} dto);
 
     long remove(long id);
 
-    List<${data.modelName}> queryList(${data.modelName} dto);
 
     ${data.modelName} selectOne(long id);
 

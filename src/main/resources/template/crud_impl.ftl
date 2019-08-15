@@ -28,10 +28,19 @@ public class ${data.modelName}ServiceImpl implements ${data.modelName}Service {
     public PageQueryResult<${data.modelName}> queryPage(${data.modelName} dto, PageCond pageCond) {
         List<${data.modelName}> list = mapper.selectPage(dto, pageCond);
         if (CollectionUtils.isEmpty(list)) {
-            logger.info("${data.modelName}列表查询为空");
+            logger.info("${data.modelName}query list is empty!");
             return new PageQueryResult<>(pageCond, new ArrayList<>());
         }
         return new PageQueryResult<>(pageCond, list);
+    }
+
+    @Override
+    public List<${data.modelName}> queryList(${data.modelName} dto){
+        if (null == dto) {
+            logger.info("query List failure,${data.modelName} is null");
+            return new ArrayList<>();
+        }
+        return mapper.selectList(dto);
     }
 
     @Override
@@ -41,23 +50,23 @@ public class ${data.modelName}ServiceImpl implements ${data.modelName}Service {
             return FAIL_INDEX;
         }
         if (dto.getId() == 0) {
-            logger.info("开始新增${data.modelName}");
-            return mapper.insertSelective(dto);
+            logger.info("begin to insert ${data.modelName}");
+            return mapper.insert(dto);
         }
         if (dto.getId() > 0) {
-            logger.info("开始更新${data.modelName}");
-            return mapper.updateByPrimaryKey(dto);
+            logger.info("begin to update ${data.modelName}");
+            return mapper.update(dto);
         }
         return FAIL_INDEX;
     }
 
     @Override
     public long remove(long id) {
-        return mapper.deleteByPrimaryKey(id);
+        return mapper.deleteById(id);
     }
 
     @Override
     public ${data.modelName} selectOne(long id) {
-        return mapper.selectByPrimaryKey(id);
+        return mapper.selectOne(id);
     }
 }

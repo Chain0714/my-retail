@@ -23,6 +23,21 @@
         order by id
     </select>
 
+    <select id="selectList" resultMap="resultMap">
+        select
+        <#list data.pairs as p >
+            ${p.column}<#if p_has_next>,</#if>
+        </#list>
+        from ${data.tblName}
+        where 1 = 1
+        <#list data.pairs as p >
+            <if test="queryDto.${p.field} != null">
+                and ${p.column} = <#noparse> #{queryDto.</#noparse>${p.field}}
+            </if>
+        </#list>
+        order by id
+    </select>
+
     <select id="selectOne" resultMap="resultMap">
         select
         <#list data.pairs as p >
