@@ -51,16 +51,20 @@
         insert into ${data.tblName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <#list data.pairs as p >
-            <if test="dto.${p.field} != null">
-                ${p.column},
-            </if>
+            <#if p.column!="id">
+                <if test="dto.${p.field} != null">
+                    ${p.column},
+                </if>
+            </#if>
             </#list>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <#list data.pairs as p >
+                <#if p.column!="id">
                 <if test="dto.${p.field} != null">
                     <#noparse>#{dto.</#noparse>${p.field},jdbcType=${p.type}},
                 </if>
+                </#if>
             </#list>
         </trim>
     </insert>
@@ -69,9 +73,11 @@
         update ${data.tblName}
         <set>
             <#list data.pairs as p >
+            <#if p.column!="id">
             <if test="dto.${p.field} != null">
                 config_type = <#noparse>#{dto.</#noparse>${p.field},jdbcType=${p.type}},
             </if>
+            </#if>
             </#list>
         </set>
         where id = <#noparse>#{dto.id,jdbcType=BIGINT}</#noparse>
