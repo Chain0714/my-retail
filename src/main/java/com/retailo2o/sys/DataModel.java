@@ -28,5 +28,6 @@ public class DataModel {
         private String field;
         private String column;
         private String type;
+        private String comment;
     }
 }
