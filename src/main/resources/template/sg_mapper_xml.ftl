@@ -13,7 +13,7 @@
         <foreach collection="list" item="instObj" index="index" separator=",">
             (
             <#list data.pairs as p >
-                <#noparse>#{instObj.</#noparse>${p.field}},jdbcType=${p.type}<#if p_has_next>},</#if>
+                <#noparse>#{instObj.</#noparse>${p.field},jdbcType=${p.type}<#if p_has_next>},</#if>
             </#list>
             )
         </foreach>

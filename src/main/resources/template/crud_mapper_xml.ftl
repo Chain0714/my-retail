@@ -16,9 +16,11 @@
         from ${data.tblName}
         where 1 = 1
         <#list data.pairs as p >
+        <#if p.column != 'id'>
         <if test="queryDto.${p.field} != null">
             and ${p.column} = <#noparse> #{queryDto.</#noparse>${p.field}}
         </if>
+        </#if>
         </#list>
         order by id
     </select>
@@ -31,9 +33,15 @@
         from ${data.tblName}
         where 1 = 1
         <#list data.pairs as p >
-            <if test="queryDto.${p.field} != null">
-                and ${p.column} = <#noparse> #{queryDto.</#noparse>${p.field}}
-            </if>
+            <#if p.column = 'id'>
+                <if test="queryDto.id != null and queryDto.id >0">
+                    and id = <#noparse>#{queryDto.id}</#noparse>
+                </if>
+            <#else>
+                <if test="queryDto.${p.field} != null">
+                    and ${p.column} = <#noparse> #{queryDto.</#noparse>${p.field}}
+                </if>
+            </#if>
         </#list>
         order by id
     </select>
@@ -75,7 +83,7 @@
             <#list data.pairs as p >
             <#if p.column!="id">
             <if test="dto.${p.field} != null">
-                config_type = <#noparse>#{dto.</#noparse>${p.field},jdbcType=${p.type}},
+                ${p.column} = <#noparse>#{dto.</#noparse>${p.field},jdbcType=${p.type}},
             </if>
             </#if>
             </#list>

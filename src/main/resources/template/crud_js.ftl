@@ -11,6 +11,10 @@ export default {
     return request.postJSON('/${data._modelName}/queryPage.do', param)
   },
 
+  queryList(param) {
+    return request.postJSON('/${data._modelName}/queryList.do', param)
+  },
+
   saveOrUpdate(param) {
     return request.postJSON('/${data._modelName}/saveOrUpdate.do', param)
   }

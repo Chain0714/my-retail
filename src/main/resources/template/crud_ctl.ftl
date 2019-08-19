@@ -40,8 +40,18 @@ public class ${data.modelName}Controller extends BaseController {
             buildFailResponse(ExceptionCodeEnum.ERROR);
             return;
         }
-        buildFailResponse(ExceptionCodeEnum.SUCCESS);
+        buildSuccessResponse(ExceptionCodeEnum.SUCCESS);
     }
 
-
+    public void queryList() {
+        ${data.modelName} req = this.getBody(BbTransPaymentMode.class);
+        List<${data.modelName}> ${data._modelName}s;
+        try {
+            ${data._modelName}s = ${data._modelName}Service.queryList(req);
+        } catch (Exception e) {
+            buildFailResponse(ExceptionCodeEnum.ERROR);
+            return;
+        }
+        buildSuccessResponse(${data._modelName}s);
+    }
 }

@@ -136,14 +136,14 @@
       },
       //编辑
       edit(row) {
-
+        this.dialogVisible = true;
+        this.isAdd = false;
+        <#list data.pairs as p>
+            this.#{p.field} = row.#{p.field};
+        </#list>
       },
 
       delete(row) {
-
-      },
-
-      changeStatus(row) {
 
       },
 
@@ -154,11 +154,12 @@
       //重置按钮
       onClean() {
           <#list data.pairs as p>
-          this.search.${p.field}="";
+          this.search.${p.field}=null;
           </#list>
       },
       //进入添加页面
       add() {
+        this.${data._modelName} = {};
         this.dialogVisible = true;
         this.isAdd = true;
       },
@@ -168,10 +169,10 @@
             this.$message.error("保存失败！");
           } else {
             this.$message.error("保存成功！");
+          this.dialogVisible = false;
+          this.getTableDate();
           }
         });
-        this.dialogVisible = false;
-        this.getTableDate();
       },
 
       handleClose(done) {
