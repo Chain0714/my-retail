@@ -16,7 +16,6 @@ public interface ${data.modelName}Service {
 
     long remove(long id);
 
-
     ${data.modelName} selectOne(long id);
 
 }

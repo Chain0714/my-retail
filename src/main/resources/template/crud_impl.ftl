@@ -28,7 +28,7 @@ public class ${data.modelName}ServiceImpl implements ${data.modelName}Service {
     public PageQueryResult<${data.modelName}> queryPage(${data.modelName} dto, PageCond pageCond) {
         List<${data.modelName}> list = mapper.selectPage(dto, pageCond);
         if (CollectionUtils.isEmpty(list)) {
-            logger.info("${data.modelName}query list is empty!");
+            logger.info("${data.modelName} query list is empty!");
             return new PageQueryResult<>(pageCond, new ArrayList<>());
         }
         return new PageQueryResult<>(pageCond, list);

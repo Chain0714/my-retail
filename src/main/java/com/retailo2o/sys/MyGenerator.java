@@ -18,8 +18,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MyGenerator {
-    private static final String MODEL_NAME = "modelName";
-
     private Configuration cfg = new Configuration();
 
     private void init() throws IOException {
@@ -30,29 +28,27 @@ public class MyGenerator {
 
     public void sgGen() throws IOException, TemplateException, DocumentException {
         init();
-        //1.首先设置generatorConfig.xml，执行mybatis generator plugin
+        //1.设置generatorConfig.xml
         //2.设置DataModel
         DataModel dataModel = new DataModel();
-        dataModel.setModelName("BbTransConfig");
-        dataModel.set_modelName("bbTransConfig");
-        dataModel.setDesc("付款传递接口配置");
-        dataModel.setDsName("sam");
-        dataModel.setTblName("bb_trans_config");
-        String sqlText = "CREATE TABLE `bb_trans_config` (\n" +
+        dataModel.setModelName("BbTransConfigDetails");
+        dataModel.set_modelName("bbTransConfigDetails");
+        dataModel.setDesc("付款传递接口配置明细");
+        dataModel.setDsName("");
+        dataModel.setTblName("bb_trans_config_details");
+        String sqlText = "CREATE TABLE `bb_trans_config_details` (\n" +
                 "  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',\n" +
                 "  `mtenant_id` varchar(20) NOT NULL DEFAULT '' COMMENT '租户号',\n" +
-                "  `interface_field_code` varchar(12) NOT NULL DEFAULT '' COMMENT '接口字段编码[pk]',\n" +
-                "  `interface_field_name` varchar(100) NOT NULL DEFAULT '' COMMENT '接口字段名称',\n" +
-                "  `state` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态[0停用1启用]',\n" +
-                "  `remark` varchar(500) NOT NULL DEFAULT '' COMMENT '说明',\n" +
-                "  `build_man_code` varchar(20) NOT NULL DEFAULT '' COMMENT '创建人编码',\n" +
-                "  `build_man_name` varchar(60) NOT NULL DEFAULT '' COMMENT '创建人名称',\n" +
-                "  `update_man_code` varchar(20) NOT NULL DEFAULT '' COMMENT '更新人编码',\n" +
-                "  `update_man_name` varchar(60) NOT NULL DEFAULT '' COMMENT '更新人名称',\n" +
+                "  `interface_field_code` varchar(12) NOT NULL DEFAULT '' COMMENT '接口字段编码',\n" +
+                "  `platform_code` varchar(20) NOT NULL DEFAULT '' COMMENT '租户编码',\n" +
+                "  `platform_name` varchar(60) NOT NULL DEFAULT '' COMMENT '租户名称',\n" +
+                "  `payment_mode_code` varchar(12) NOT NULL DEFAULT '' COMMENT '支付方式编码',\n" +
+                "  `payment_mode_name` varchar(100) NOT NULL DEFAULT '' COMMENT '支付方式名称',\n" +
+                "  `config_value` varchar(100) NOT NULL DEFAULT '' COMMENT '配置值',\n" +
                 "  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n" +
                 "  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n" +
                 "  PRIMARY KEY (`id`)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='付款传递接口配置';";
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='付款传递接口配置明细';";
         //3.解析
         List<DataModel.Pair> pairs = XmlUtil.parseSqlXml(new File("src/main/resources/com/retailo2o/smc/mapper/" + dataModel.getModelName() + "Mapper.xml"));
         Map<String, String> columnComment = parseColumnCommentMap(sqlText);

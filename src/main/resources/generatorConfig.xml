@@ -43,7 +43,7 @@
 
 		
         
-        <table tableName="bb_trans_config" domainObjectName="BbTransConfig"
+        <table tableName="bb_trans_config_details" domainObjectName="BbTransConfigDetails"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

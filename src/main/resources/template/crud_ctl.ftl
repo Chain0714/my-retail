@@ -45,13 +45,13 @@ public class ${data.modelName}Controller extends BaseController {
 
     public void queryList() {
         ${data.modelName} req = this.getBody(${data.modelName}.class);
-        List<${data.modelName}> ${data._modelName}s;
+        List<${data.modelName}> ${data._modelName}List;
         try {
-            ${data._modelName}s = ${data._modelName}Service.queryList(req);
+            ${data._modelName}List = ${data._modelName}Service.queryList(req);
         } catch (Exception e) {
             buildFailResponse(ExceptionCodeEnum.ERROR);
             return;
         }
-        buildSuccessResponse(${data._modelName}s);
+        buildSuccessResponse(${data._modelName}List);
     }
 }
