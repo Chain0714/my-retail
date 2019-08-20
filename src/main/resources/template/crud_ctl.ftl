@@ -31,7 +31,7 @@ public class ${data.modelName}Controller extends BaseController {
     public void saveOrUpdate() {
         ${data.modelName} req = this.getBody(${data.modelName}.class);
         if (null == req) {
-            logger.error("save or update error:request is null");
+            logger.error("save or update ${data.modelName} error:request is null");
             buildFailResponse(ExceptionCodeEnum.PARA_NULL);
             return;
         }
@@ -44,7 +44,7 @@ public class ${data.modelName}Controller extends BaseController {
     }
 
     public void queryList() {
-        ${data.modelName} req = this.getBody(BbTransPaymentMode.class);
+        ${data.modelName} req = this.getBody(${data.modelName}.class);
         List<${data.modelName}> ${data._modelName}s;
         try {
             ${data._modelName}s = ${data._modelName}Service.queryList(req);

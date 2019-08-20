@@ -43,7 +43,7 @@
 
 		
         
-        <table tableName="bb_trans_payment_mode" domainObjectName="BbTransPaymentMode"
+        <table tableName="bb_trans_config" domainObjectName="BbTransConfig"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

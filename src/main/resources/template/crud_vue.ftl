@@ -32,6 +32,7 @@
         <el-table-column
                 prop="${p.field}"
                 label="${p.comment}">
+        </el-table-column>
         </#list>
         <el-table-column
           fixed="right"
@@ -59,7 +60,7 @@
                class="demo-ruleForm">
         <#list data.pairs as p>
           <el-form-item label="${p.comment}" prop="${p.field}">
-            <el-input v-model="${data._modelName}.${p.field}" :disabled="true" placeholder="${p.comment}"></el-input>
+            <el-input v-model="${data._modelName}.${p.field}" placeholder="${p.comment}"></el-input>
           </el-form-item>
         </#list>
       </el-form>
@@ -80,11 +81,7 @@
 
     data() {
       return {
-        search: {
-          <#list data.pairs as p>
-          ${p.field}: ""<#if p_has_next>,</#if>
-          </#list>
-        },
+        search: {},
         tableData: [],
         pageInfo: {
           pageIndex: 1,
@@ -92,12 +89,13 @@
           total: 0
         },
         ${data._modelName}: {
-        <#list data.pairs as p>
-        ${p.field}: ""<#if p_has_next>,</#if>
-        </#list>
+          <#list data.pairs as p>
+              ${p.field}:null<#if p_has_next>,</#if>
+          </#list>
         },
         isAdd: true,
-        dialogVisible: false
+        dialogVisible: false,
+        rules: {}
       }
     },
     computed: {
@@ -129,7 +127,7 @@
         let params = this.search;
         params.pageSize = this.pageInfo.pageSize;
         params.pageIndex = this.pageInfo.pageIndex;
-        transPaymentMode.queryPage(params).then(response => {
+        ${data._modelName}.queryPage(params).then(response => {
           this.pageInfo.total = response.data.pageCond.count;
           this.tableData = response.data.list;
         });
@@ -139,7 +137,7 @@
         this.dialogVisible = true;
         this.isAdd = false;
         <#list data.pairs as p>
-            this.#{p.field} = row.#{p.field};
+        this.${data._modelName}.${p.field} = row.${p.field};
         </#list>
       },
 
@@ -154,7 +152,7 @@
       //重置按钮
       onClean() {
           <#list data.pairs as p>
-          this.search.${p.field}=null;
+          this.search={};
           </#list>
       },
       //进入添加页面
@@ -164,13 +162,19 @@
         this.isAdd = true;
       },
       submitDialog() {
-        ${data._modelName}.saveOrUpdate(this.${data._modelName}).then(response => {
-          if (response.code !== 1) {
-            this.$message.error("保存失败！");
+        this.$refs['${data._modelName}'].validate(validate => {
+          if (validate) {
+            ${data._modelName}.saveOrUpdate(this.${data._modelName}).then(response => {
+              if (response.code !== '1') {
+              this.$message.error("保存失败！");
+            } else {
+              this.$message.success("保存成功！");
+            }
+          });
+            this.dialogVisible = false;
+            this.getTableDate();
           } else {
-            this.$message.error("保存成功！");
-          this.dialogVisible = false;
-          this.getTableDate();
+            this.$message.error("表单不合法");
           }
         });
       },

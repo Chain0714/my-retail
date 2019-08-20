@@ -33,21 +33,18 @@ public class MyGenerator {
         //1.首先设置generatorConfig.xml，执行mybatis generator plugin
         //2.设置DataModel
         DataModel dataModel = new DataModel();
-        dataModel.setModelName("BbTransPaymentMode");
-        dataModel.set_modelName("bbTransPaymentMode");
-        dataModel.setTypeCode("");
-        dataModel.setDesc("");
+        dataModel.setModelName("BbTransConfig");
+        dataModel.set_modelName("bbTransConfig");
+        dataModel.setDesc("付款传递接口配置");
         dataModel.setDsName("sam");
-        dataModel.setTblName("bb_trans_payment_mode");
-        dataModel.setTimer("");
-        dataModel.setTopic("");
-        String sqlText = "CREATE TABLE `bb_trans_payment_mode` (\n" +
+        dataModel.setTblName("bb_trans_config");
+        String sqlText = "CREATE TABLE `bb_trans_config` (\n" +
                 "  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',\n" +
                 "  `mtenant_id` varchar(20) NOT NULL DEFAULT '' COMMENT '租户号',\n" +
-                "  `payment_mode_code` varchar(12) NOT NULL DEFAULT '' COMMENT '支付方式编码[pk]',\n" +
-                "  `payment_mode_name` varchar(100) NOT NULL DEFAULT '' COMMENT '支付方式名称',\n" +
-                "  `is_trans` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否传递[0否1是]',\n" +
+                "  `interface_field_code` varchar(12) NOT NULL DEFAULT '' COMMENT '接口字段编码[pk]',\n" +
+                "  `interface_field_name` varchar(100) NOT NULL DEFAULT '' COMMENT '接口字段名称',\n" +
                 "  `state` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态[0停用1启用]',\n" +
+                "  `remark` varchar(500) NOT NULL DEFAULT '' COMMENT '说明',\n" +
                 "  `build_man_code` varchar(20) NOT NULL DEFAULT '' COMMENT '创建人编码',\n" +
                 "  `build_man_name` varchar(60) NOT NULL DEFAULT '' COMMENT '创建人名称',\n" +
                 "  `update_man_code` varchar(20) NOT NULL DEFAULT '' COMMENT '更新人编码',\n" +
@@ -55,7 +52,7 @@ public class MyGenerator {
                 "  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n" +
                 "  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n" +
                 "  PRIMARY KEY (`id`)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='付款传递支付方式';";
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='付款传递接口配置';";
         //3.解析
         List<DataModel.Pair> pairs = XmlUtil.parseSqlXml(new File("src/main/resources/com/retailo2o/smc/mapper/" + dataModel.getModelName() + "Mapper.xml"));
         Map<String, String> columnComment = parseColumnCommentMap(sqlText);
@@ -64,11 +61,11 @@ public class MyGenerator {
 
         Map<String, Object> root = new HashMap<>();
         root.put("data", dataModel);
-//        //4.export
-//        Template exportTemp = cfg.getTemplate("export.ftl");
-//        Writer exportWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/export/", dataModel.getModelName() + "Export.java")));
-//        exportTemp.process(root, exportWriter);
-//        exportWriter.close();
+        //4.ctl
+        Template exportTemp = cfg.getTemplate("crud_ctl.ftl");
+        Writer exportWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/ctl/", dataModel.getModelName() + "Controller.java")), StandardCharsets.UTF_8);
+        exportTemp.process(root, exportWriter);
+        exportWriter.close();
         //5.service
         Template serviceTemp = cfg.getTemplate("crud_service.ftl");
         Writer serviceWriter = new OutputStreamWriter(new FileOutputStream(FileUtil.createFile("src/main/java/com/retailo2o/smc/service/", dataModel.getModelName() + "Service.java")), StandardCharsets.UTF_8);
