@@ -15,6 +15,9 @@ public class ${data.modelName}Controller extends BaseController {
 
     private static final long FAIL_INDEX = -1;
 
+    private static final String ID = "id";
+
+
     @RefLogger
     private Logger logger;
 
@@ -54,4 +57,19 @@ public class ${data.modelName}Controller extends BaseController {
         }
         buildSuccessResponse(${data._modelName}List);
     }
+
+    public void remove() {
+        String id = getParamNonNull(ID);
+        if (StringKit.isEmpty(id)) {
+            buildFailResponse(ExceptionCodeEnum.ERROR);
+            return;
+        }
+        try {
+            bbTransConfigDetailsService.remove(Long.valueOf(id));
+        } catch (NumberFormatException e) {
+            buildFailResponse(ExceptionCodeEnum.ERROR);
+            return;
+        }
+            buildSuccessResponse(ExceptionCodeEnum.SUCCESS);
+        }
 }

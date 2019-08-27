@@ -39,7 +39,7 @@
           label="操作">
           <template slot-scope="scope">
             <el-button @click="edit(scope.row)" type="text" size="small">编辑</el-button>
-            <el-button @click="delete(scope.row)" type="text" size="small">删除</el-button>
+            <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -141,8 +141,15 @@
         </#list>
       },
 
-      delete(row) {
-
+      remove(row) {
+        ${data._modelName}.remove({id: row.id}).then(response => {
+          if (response.code !== '1') {
+            this.$message.error("删除失败！");
+           } else {
+            this.$message.success("删除成功！");
+            this.getTableDate();
+          }
+        });
       },
 
       //查询操作
@@ -151,9 +158,7 @@
       },
       //重置按钮
       onClean() {
-          <#list data.pairs as p>
           this.search={};
-          </#list>
       },
       //进入添加页面
       add() {

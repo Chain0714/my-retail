@@ -17,5 +17,10 @@ export default {
 
   saveOrUpdate(param) {
     return request.postJSON('/${data._modelName}/saveOrUpdate.do', param)
+  },
+
+
+  remove(param) {
+    return request.postJSON('/bbTransConfigDetails/remove.do', param)
   }
 }
