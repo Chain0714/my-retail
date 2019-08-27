@@ -65,7 +65,7 @@ public class ${data.modelName}Controller extends BaseController {
             return;
         }
         try {
-            bbTransConfigDetailsService.remove(Long.valueOf(id));
+            ${data._modelName}Service.remove(Long.valueOf(id));
         } catch (NumberFormatException e) {
             buildFailResponse(ExceptionCodeEnum.ERROR);
             return;
