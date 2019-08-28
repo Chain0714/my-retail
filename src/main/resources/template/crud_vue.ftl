@@ -174,10 +174,10 @@
               this.$message.error("保存失败！");
             } else {
               this.$message.success("保存成功！");
+              this.dialogVisible = false;
+              this.getTableDate();
             }
           });
-            this.dialogVisible = false;
-            this.getTableDate();
           } else {
             this.$message.error("表单不合法");
           }

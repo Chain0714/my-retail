@@ -21,6 +21,6 @@ export default {
 
 
   remove(param) {
-    return request.postJSON('/bbTransConfigDetails/remove.do', param)
+    return request.postJSON('/${data._modelName}/remove.do', param)
   }
 }
