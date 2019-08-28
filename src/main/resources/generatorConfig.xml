@@ -19,7 +19,7 @@
 <!--         </jdbcConnection>-->
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://10.253.1.27:3306/sam_m_1?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowMultiQueries=true&amp;tinyInt1isBit=false"
+                        connectionURL="jdbc:mysql://10.253.1.27:3306/fresh_m_1?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowMultiQueries=true&amp;tinyInt1isBit=false"
                         userId="dev_test" password="dev_test">
 
         </jdbcConnection>
@@ -43,7 +43,7 @@
 
 		
         
-        <table tableName="bb_trans_config_details" domainObjectName="BbTransConfigDetails"
+        <table tableName="bb_ele_weigher" domainObjectName="BbEleWeigher"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

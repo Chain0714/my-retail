@@ -31,24 +31,26 @@ public class MyGenerator {
         //1.设置generatorConfig.xml
         //2.设置DataModel
         DataModel dataModel = new DataModel();
-        dataModel.setModelName("BbTransConfigDetails");
-        dataModel.set_modelName("bbTransConfigDetails");
-        dataModel.setDesc("付款传递接口配置明细");
-        dataModel.setDsName("");
-        dataModel.setTblName("bb_trans_config_details");
-        String sqlText = "CREATE TABLE `bb_trans_config_details` (\n" +
+        dataModel.setModelName("BbEleWeigher");
+        dataModel.set_modelName("bbEleWeigher");
+        dataModel.setDesc("电子秤档案");
+        dataModel.setDsName("fresh");
+        dataModel.setTblName("bb_ele_weigher");
+        String sqlText = "CREATE TABLE `bb_ele_weigher` (\n" +
                 "  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',\n" +
-                "  `mtenant_id` varchar(20) NOT NULL DEFAULT '' COMMENT '租户号',\n" +
-                "  `interface_field_code` varchar(12) NOT NULL DEFAULT '' COMMENT '接口字段编码',\n" +
-                "  `platform_code` varchar(20) NOT NULL DEFAULT '' COMMENT '租户编码',\n" +
-                "  `platform_name` varchar(60) NOT NULL DEFAULT '' COMMENT '租户名称',\n" +
-                "  `payment_mode_code` varchar(12) NOT NULL DEFAULT '' COMMENT '支付方式编码',\n" +
-                "  `payment_mode_name` varchar(100) NOT NULL DEFAULT '' COMMENT '支付方式名称',\n" +
-                "  `config_value` varchar(100) NOT NULL DEFAULT '' COMMENT '配置值',\n" +
+                "  `mtenant_id` varchar(20) NOT NULL DEFAULT '' COMMENT '平台租户号',\n" +
+                "  `weigher_code` varchar(4) NOT NULL DEFAULT '' COMMENT '电子秤编码',\n" +
+                "  `weigher_name` varchar(50) NOT NULL DEFAULT '' COMMENT '电子秤名称',\n" +
+                "  `weigher_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '秤类型[0 其他1寺岗2托利多3顶尖]',\n" +
+                "  `export_method` tinyint(4) NOT NULL DEFAULT '0' COMMENT '传秤方式[0导出文件1联网]',\n" +
+                "  `weigher_model` varchar(50) NOT NULL DEFAULT '' COMMENT '秤型号',\n" +
+                "  `ip` varchar(20) NOT NULL DEFAULT '' COMMENT 'IP地址',\n" +
+                "  `format_code` varchar(50) NOT NULL DEFAULT '' COMMENT '文件格式',\n" +
                 "  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n" +
-                "  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n" +
-                "  PRIMARY KEY (`id`)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='付款传递接口配置明细';";
+                "  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',\n" +
+                "  PRIMARY KEY (`id`),\n" +
+                "  UNIQUE KEY `uk_ele_weigher_code` (`mtenant_id`,`weigher_code`)\n" +
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='电子秤档案';";
         //3.解析
         List<DataModel.Pair> pairs = XmlUtil.parseSqlXml(new File("src/main/resources/com/retailo2o/smc/mapper/" + dataModel.getModelName() + "Mapper.xml"));
         Map<String, String> columnComment = parseColumnCommentMap(sqlText);
