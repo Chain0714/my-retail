@@ -77,6 +77,31 @@
         </trim>
     </insert>
 
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into ${data.tblName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <#list data.pairs as p >
+                <#if p.column!="id">
+                        ${p.column},
+                </#if>
+            </#list>
+        </trim>
+        values
+        <foreach collection="list" item="instObj" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+            <#list data.pairs as p >
+                    <#noparse>#{instObj.</#noparse>${p.field},jdbcType=${p.type}}<#if p_has_next>,</#if>
+            </#list>
+            </trim>
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        <trim prefix="" suffix="" suffixOverrides=",">
+        <#list data.pairs as p >
+                ${p.column} = VALUES(${p.column})<#if p_has_next>,</#if>
+        </#list>
+        </trim>
+    </insert>
+
     <update id="update" parameterType="com.retailo2o.smc.entity.${data.modelName}">
         update ${data.tblName}
         <set>

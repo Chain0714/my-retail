@@ -17,6 +17,8 @@ public interface ${data.modelName}Mapper {
 
     long insert(@Param("dto") ${data.modelName} dto);
 
+    long batchInsert(@Param("list") List<${data.modelName}> list);
+
     long update(@Param("dto") ${data.modelName} dto);
 
     long deleteById(@Param("id") long id);

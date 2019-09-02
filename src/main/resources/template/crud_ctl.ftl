@@ -53,6 +53,7 @@ public class ${data.modelName}Controller extends BaseController {
             ${data._modelName}List = ${data._modelName}Service.queryList(req);
         } catch (Exception e) {
             buildFailResponse(ExceptionCodeEnum.ERROR);
+            logger.error("queryList ${data._modelName} error:",e);
             return;
         }
         buildSuccessResponse(${data._modelName}List);
@@ -68,6 +69,7 @@ public class ${data.modelName}Controller extends BaseController {
             ${data._modelName}Service.remove(Long.valueOf(id));
         } catch (NumberFormatException e) {
             buildFailResponse(ExceptionCodeEnum.ERROR);
+            logger.error("queryList ${data._modelName} error:",e);
             return;
         }
             buildSuccessResponse(ExceptionCodeEnum.SUCCESS);

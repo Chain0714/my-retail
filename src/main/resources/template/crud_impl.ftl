@@ -49,7 +49,7 @@ public class ${data.modelName}ServiceImpl implements ${data.modelName}Service {
             logger.info("merge failure,${data.modelName} is null");
             return FAIL_INDEX;
         }
-        if (dto.getId() == 0) {
+        if (dto.getId() == null) {
             logger.info("begin to insert ${data.modelName}");
             return mapper.insert(dto);
         }
