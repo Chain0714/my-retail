@@ -21,6 +21,6 @@ public interface ${data.modelName}Mapper {
 
     long update(@Param("dto") ${data.modelName} dto);
 
-    long deleteById(@Param("id") long id);
+    long delete(@Param("dto") ${data.modelName} dto);
 
 }

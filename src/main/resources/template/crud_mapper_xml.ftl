@@ -116,9 +116,16 @@
         where id = <#noparse>#{dto.id,jdbcType=BIGINT}</#noparse>
     </update>
 
-    <delete id="deleteById">
+    <delete id="delete">
         delete from ${data.tblName}
-        where id = <#noparse>#{id}</#noparse>
+        where 1 = 1
+        <#list data.pairs as p >
+            <#if p.column != 'id'>
+                <if test="queryDto.${p.field} != null">
+                    and ${p.column} = <#noparse> #{queryDto.</#noparse>${p.field}}
+                </if>
+            </#if>
+        </#list>
     </delete>
 
 </mapper>

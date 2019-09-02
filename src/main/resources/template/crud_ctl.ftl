@@ -60,16 +60,17 @@ public class ${data.modelName}Controller extends BaseController {
     }
 
     public void remove() {
-        String id = getParamNonNull(ID);
-        if (StringKit.isEmpty(id)) {
+        ${data.modelName} req = this.getBody(${data.modelName}.class);
+        if (null == req) {
+            logger.error("remove ${data.modelName} error:request is null");
             buildFailResponse(ExceptionCodeEnum.ERROR);
             return;
         }
         try {
-            ${data._modelName}Service.remove(Long.valueOf(id));
+            ${data._modelName}Service.remove(req);
         } catch (NumberFormatException e) {
             buildFailResponse(ExceptionCodeEnum.ERROR);
-            logger.error("queryList ${data._modelName} error:",e);
+            logger.error("remove ${data._modelName} error:",e);
             return;
         }
             buildSuccessResponse(ExceptionCodeEnum.SUCCESS);

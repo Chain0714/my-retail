@@ -61,8 +61,8 @@ public class ${data.modelName}ServiceImpl implements ${data.modelName}Service {
     }
 
     @Override
-    public long remove(long id) {
-        return mapper.deleteById(id);
+    public long remove(${data.modelName} dto) {
+        return mapper.delete(dto);
     }
 
     @Override

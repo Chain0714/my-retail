@@ -14,7 +14,7 @@ public interface ${data.modelName}Service {
 
     long merge(${data.modelName} dto);
 
-    long remove(long id);
+    long remove(${data.modelName} dto);
 
     ${data.modelName} selectOne(long id);
 
